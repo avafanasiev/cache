@@ -5,15 +5,10 @@ public class CalcService {
   private static final Map<int[], int[]> serviceCache = new HashMap<>();
 
   public static int[] calculate(int[] src) {
-    int[] result = serviceCache.get(src);
+    result = serviceCache.get(src);
     if (result == null) {
-      synchronized (serviceCache) {
-        result = serviceCache.get(src);
-        if (result == null) {
-          result = executeCalculation(src);
-          serviceCache.put(src, result);
-        }
-      }
+      result = executeCalculation(src);
+      serviceCache.put(src, result);
     }
     return result;
   }
